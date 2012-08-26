@@ -1,6 +1,7 @@
 
 package tetris;
 
+import java.util.*;
 
 public class Shape {
     private int[][] coords;
@@ -31,5 +32,12 @@ public class Shape {
             }
         }
         pieceShape = shape;
+    }
+    
+    public void setRandomShape() {
+        Random r = new Random();
+        int x = Math.abs(r.nextInt()) % 7 + 1;
+        TetrisPiece[] values = TetrisPiece.values();
+        setShape(values[x]);
     }
 }
