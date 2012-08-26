@@ -3,10 +3,17 @@ package tetris;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * Tetris is a class that creates a window and a menu for the game.
+ * @author Forss
+ * @version %I% %G%
+ */
 public class Tetris implements Runnable {
      private JFrame window;
      
+     /**
+      * Creates a new window
+      */
      public void run() {
         window = new JFrame("Tetris");
         window.setPreferredSize(new Dimension(200, 400));
@@ -16,6 +23,10 @@ public class Tetris implements Runnable {
         window.setVisible(true);
      }
      
+     /**
+      * Creates a menu to the window.
+      * @param window   contains the window, which the menu will be added to
+      */
      public void createMenu(JFrame window) {
         JMenuBar menuBar = new JMenuBar();
         
@@ -32,11 +43,15 @@ public class Tetris implements Runnable {
         
         window.setJMenuBar(menuBar);
      }
-     
+     /**
+      * Starts the game.
+      */
      public void newGame() {
          
      }
-     
+     /**
+      * Disposes the window.
+      */
      public void exitGame() {
          window.dispose();
      }
