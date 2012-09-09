@@ -1,15 +1,15 @@
 
 package tetris;
 
-import java.util.*;
+import java.util.Random;
 
 /**
  * Shape is a class that creates the different Tetrominoes and handles
- * changing the positions of the pieces. This is made using coordinates.
+ * rotating the pieces.
  * @author Forss
  * @version %I% %G%
  */
-public class Shape {
+public final class Shape {
     private int[][] coords;
     private int[][][] coordsTable;
     enum TetrisPiece { NoShape, ZShape, SShape, LineShape, TShape, SquareShape,
@@ -24,8 +24,8 @@ public class Shape {
         setShape(TetrisPiece.NoShape);
     }
     /**
-     * Sets the coordinates for a piece.
-     * @param shape     contains the shape of the piece
+     * Sets the coordinates for shapes.
+     * @param shape     contains a shape
      */
     public void setShape(TetrisPiece shape) {
         coordsTable = new int[][][] {
@@ -47,7 +47,7 @@ public class Shape {
     }
     
     /**
-     * Randomly selects the shape, that will be created.
+     * Randomly selects a shape.
      */
     public void setRandomShape() {
         Random r = new Random();
@@ -55,28 +55,37 @@ public class Shape {
         TetrisPiece[] values = TetrisPiece.values();
         setShape(values[x]);
     }
+    
+    /**
+     * Returns the shape of the current piece.
+     * @return  returns the shape of the piece
+     */
     public TetrisPiece getShape() {
         return pieceShape;
     }
     
     /**
-     * 
-     * @param index
-     * @return 
+     * Returns the x-coordinates of a piece.
+     * @param   index
+     * @return  returns the x-coordinates of a piece.
      */
     public int x(int index) { 
         return coords[index][0];
     }
     
     /**
-     * 
+     * Returns the y-coordinates of a piece.
      * @param index
-     * @return 
+     * @return  returns the y-coordinates of a piece
      */
     public int y(int index) {
         return coords[index][1];
     } 
     
+    /**
+     * Calculates the smallest possible x-coordinate.
+     * @return returns the smallest possible x-coordinate
+     */
     public int minX() {
       int m = coords[0][0];
       for (int i=0; i < 4; i++) {
@@ -84,7 +93,10 @@ public class Shape {
       }
       return m;
     }
-
+    /**
+     * Calculates the smallest possible y-coordinate.
+     * @return returns the smallest possible y-coordinate 
+     */
     public int minY() {
       int m = coords[0][1];
       for (int i=0; i < 4; i++) {
@@ -94,29 +106,27 @@ public class Shape {
     }
     
     /**
-     * Returns the Z-axis coordinates of the piece.
+     * Sets the x-coordinates of a piece.
      * @param index
      * @param x
-     * @return 
      */
     
-    private int setX(int index, int x) {
-        return coords[index][0];
+    private void setX(int index, int x) {
+        coords[index][0] = x;
     }
     
     /**
-     * Returns the Y-axis coordinates of the piece.
+     * Sets the y-coordinates of a piece
      * @param index
-     * @param y
-     * @return 
-     */  
-    private int setY(int index, int y) {
-        return coords[index][1];
+     * @param y 
+     */
+    private void setY(int index, int y) {
+        coords[index][1] = y;
     }
     
     /**
-     * Rotates the piece counter-clockwise.
-     * @return result   returns the new position of the piece
+     * Rotates a piece counter-clockwise.
+     * @return result   returns the new position of a piece
      */
     public Shape rotatePieceLeft() {
         if (pieceShape == TetrisPiece.SquareShape) {
@@ -127,15 +137,15 @@ public class Shape {
         result.pieceShape = pieceShape;
         
         for (int i = 0; i < 4; i++) {
-            setX(i, y(i));
-            setY(i, -x(i));
+            result.setX(i, y(i));
+            result.setY(i, -x(i));
         }
         return result;
     }
     
     /**
-     * Rotates the piece clockwise.
-     * @return result   returns the new position of the piece.
+     * Rotates a piece clockwise.
+     * @return result   returns the new position of a piece.
      */
     public Shape rotatePieceRight() {
         if (pieceShape == TetrisPiece.SquareShape) {
@@ -146,8 +156,8 @@ public class Shape {
         result.pieceShape = pieceShape;
         
         for (int i = 0; i < 4; i++) {
-            setX(i, y(i));
-            setY(-i, x(i));
+            result.setX(i, -y(i));
+            result.setY(i, x(i));
         }
         return result;
     }
