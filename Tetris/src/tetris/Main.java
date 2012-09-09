@@ -1,11 +1,10 @@
 package tetris;
 
-import javax.swing.*;
-
 public class Main {
 
-    public static void main(String[] args) {
-        Tetris tetris = new Tetris();
-        SwingUtilities.invokeLater(tetris);
+    public static void main(String[] args) {      
+        Frame frame = new Frame();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }
